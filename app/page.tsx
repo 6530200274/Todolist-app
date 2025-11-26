@@ -57,7 +57,7 @@ export default function Home() {
           onClick={() => setIsOpen(true)}
           className="w-full bg-indigo-900 text-white py-2 rounded-lg font-semibold hover:bg-indigo-800 transition flex items-center justify-center gap-2"
         >
-          ➕ Add Todo
+          ➕ Add Todo 👋
         </button>
 
         {/* Divider */}
