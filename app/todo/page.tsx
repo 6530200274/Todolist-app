@@ -8,7 +8,7 @@ interface Todo {
   completed: boolean;
 }
 
-export default function Home() {
+export default function TodoPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [todo, setTodo] = useState({ date: "", title: "", description: "" });
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -57,48 +57,48 @@ export default function Home() {
           onClick={() => setIsOpen(true)}
           className="w-full bg-indigo-900 text-white py-2 rounded-lg font-semibold hover:bg-indigo-800 transition flex items-center justify-center gap-2"
         >
-          ➕ Add Todo
+          + Add Todo
         </button>
 
         {/* Divider */}
         <hr className="border-t border-gray-300 mt-6" />
 
-        {/* Search & Filter */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-2 mb-2">
+        <div className="mt-6 flex flex-col gap-4 mb-2">
+          {/* Search Input */}
           <input
             type="text"
             placeholder="Search Todo..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
+
+          {/* Filter Buttons */}
           <div className="flex gap-2">
             <button
               onClick={() => setFilter("all")}
-              className={`px-3 py-2 rounded-lg font-semibold ${
-                filter === "all" ? "bg-indigo-900 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+              className={`px-3 py-2 rounded-lg font-semibold ${filter === "all" ? "bg-indigo-900 text-white" : "bg-gray-200 text-gray-700"
+                }`}
             >
               All
             </button>
             <button
               onClick={() => setFilter("completed")}
-              className={`px-3 py-2 rounded-lg font-semibold ${
-                filter === "completed" ? "bg-indigo-900 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+              className={`px-3 py-2 rounded-lg font-semibold ${filter === "completed" ? "bg-indigo-900 text-white" : "bg-gray-200 text-gray-700"
+                }`}
             >
               Completed
             </button>
             <button
               onClick={() => setFilter("pending")}
-              className={`px-3 py-2 rounded-lg font-semibold ${
-                filter === "pending" ? "bg-indigo-900 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+              className={`px-3 py-2 rounded-lg font-semibold ${filter === "pending" ? "bg-indigo-900 text-white" : "bg-gray-200 text-gray-700"
+                }`}
             >
               Pending
             </button>
           </div>
         </div>
+
 
         {/* Todo List */}
         <ul className="mt-4 space-y-3">
@@ -117,9 +117,8 @@ export default function Home() {
               </div>
               <button
                 onClick={() => handleToggleComplete(idx)}
-                className={`px-2 py-1 rounded-lg text-white ${
-                  t.completed ? "bg-green-600" : "bg-gray-400"
-                }`}
+                className={`px-2 py-1 rounded-lg text-white ${t.completed ? "bg-green-600" : "bg-gray-400"
+                  }`}
               >
                 {t.completed ? "Done" : "Mark"}
               </button>
