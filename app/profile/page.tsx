@@ -51,7 +51,7 @@ export default function ProfileForm() {
     e.preventDefault();
     saveToLocal();
     router.push("/todo");
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-700 to-blue-950 flex items-center justify-center px-4">
