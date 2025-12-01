@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Todo {
   date: string;
@@ -41,12 +41,13 @@ export default function TodoPage() {
     return true;
   });
 
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-700 to-blue-950 flex flex-col items-center px-4 py-8 space-y-6">
       {/* Card */}
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold mb-2 text-indigo-900 font-sans">
-          Hi! Panisara 👋
+          Hi! 👋
         </h1>
         <h2 className="text-lg font-normal mb-4 text-indigo-900 font-sans">
           Set today’s main goal. You got this! 💪
