@@ -2,16 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-interface Profile  {
-  firstName: string;
-  lastName: string;
-  age: number | "";
-  birthDate: string;
-  sex: string;
-  status: string;
-  timestamp: number;
-};
+import { Profile } from "@/type/profile";
 
 export default function ProfileForm() {
   const [form, setForm] = useState<Profile>({
@@ -23,13 +14,13 @@ export default function ProfileForm() {
     status: "",
     timestamp: Date.now(),
   });
-  const [saved, setSaved] = useState<Profile | null>(null);
+
   const router = useRouter();
 
   useEffect(() => {
     const value = localStorage.getItem("myProfile");
     if (value) {
-      setSaved(JSON.parse(value));
+      setForm(JSON.parse(value));
     }
   }, []);
 
@@ -40,16 +31,12 @@ export default function ProfileForm() {
 
   const saveToLocal = () => {
     const newProfile = { ...form, timestamp: Date.now() };
-
     localStorage.setItem("myProfile", JSON.stringify(newProfile)); //ใช้ JSON.stringify เพราะ localStorage เก็บได้แต่ string
-    setSaved(newProfile);
-
     console.log("Saved profile:", newProfile);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveToLocal();
     router.push("/todo");
   };
 
@@ -135,7 +122,7 @@ export default function ProfileForm() {
 
           {/* Submit Button */}
           <button type="submit"
-            onClick={saveToLocal} style={{ marginLeft: 8 }}
+            onClick={saveToLocal}
             className="w-full bg-blue-900 text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition">
             Save Profile
           </button>

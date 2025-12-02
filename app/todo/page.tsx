@@ -1,15 +1,6 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { title } from "process";
-
-interface Todo {
-  id: number;
-  title: string;
-  description: string;
-  date?: string;
-  completed: boolean;
-}
+import { useState, useEffect } from "react";
+import { Todo } from "@/type/todo";
 
 export default function TodoPage() {
 
@@ -17,11 +8,22 @@ export default function TodoPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  
+
   const [editId, setEditId] = useState<number | null>(null);
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all"); // all | pending | completed
+
+  const [userName, setUserName] = useState("");
+
+
+  useEffect(() => {
+    const value = localStorage.getItem("myProfile");
+    if (value) {
+      const profile = JSON.parse(value);
+      setUserName(profile.firstName || "");
+    }
+  }, []);
 
   const addTodo = () => {
     if (!title.trim()) return;
@@ -70,16 +72,16 @@ export default function TodoPage() {
     if (filter === "completed") return t.completed;
     return true;
   })
-  .filter((t) =>
-    t.title.toLowerCase().includes(search.toLowerCase())
-  );
+    .filter((t) =>
+      t.title.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-700 to-blue-950 flex flex-col items-center px-4 py-8 space-y-6">
       {/* Card */}
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold mb-2 text-indigo-900 font-sans">
-          Hi! 👋
+          Hi! {userName}👋
         </h1>
         <h2 className="text-lg font-normal mb-4 text-indigo-900 font-sans">
           Set today’s main goal. You got this! 💪
